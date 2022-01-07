@@ -1,5 +1,4 @@
 
-
 jQuery.fn.extend({
     refreshSuggest: function() {
         let options = $(this).attr("options");
@@ -45,6 +44,13 @@ jQuery.fn.extend({
                 }
 
             });
+
+            suggestDiv.find("input[name='_suggest']").click(event => {
+                let cur = $(event.target);
+                $(this).val(cur.val());
+                suggestDiv.find("ol").html("");
+                $(this).focus();
+            });
         }
     },
     addSuggest: function() {
@@ -58,18 +64,27 @@ jQuery.fn.extend({
             const key = event.keyCode;
             let suggestDiv = this.prev("div[name='_suggest']");
             if (13 === key) {//carriage ret
+                if (suggestDiv.find("input").length < 1) {
+                    return;
+                }
                 let first = suggestDiv.find("input");
                 if (first) {
                     this.val(first.val());
                 }
                 suggestDiv.find("ol").html("");
             } else if (40 === key) {// down array
+                if (suggestDiv.find("input").length < 1) {
+                    return;
+                }
                 let first = suggestDiv.find("input").first();
                 if (first) {
                     first.css('backgroundColor', 'lightgray');
                     first.focus();
                 }
             } else if (38 === key) {// up array
+                if (suggestDiv.find("input").length < 1) {
+                    return;
+                }
                 let last = suggestDiv.find("input").last();
                 if (last) {
                     last.css('backgroundColor', 'lightgray');
@@ -82,3 +97,4 @@ jQuery.fn.extend({
         this.refreshSuggest();
     }
 });
+
