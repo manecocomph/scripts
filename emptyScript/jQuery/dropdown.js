@@ -92,7 +92,7 @@ jQuery.fn.extend({
     addSuggest: function(options, selectedCallback, suggestLength = 10, delayMs = 3000) {
         let suggestDiv = this.prev("div[name='_suggest']");
         if (suggestDiv.length < 1) {
-            suggestDiv = $("<div name='_suggest' style='position:relative;display:inline-block;'><ol name='_suggest' style='z-index:100;position:absolute;top:1em;padding-left:1em;'></ol></div>" );
+            suggestDiv = $("<div name='_suggest' style='position:relative;'><ol name='_suggest' style='z-index:100;position:absolute;top:2.5em;padding-left:1em;'></ol></div>" );
             suggestDiv.insertBefore(this);
 
             this.keyup(event => {
